@@ -1,16 +1,15 @@
 from django.urls import path
 from . import views
-from rest_framework import routers
-from .views import CreateTaskView, ListTaskView, TaskUpdateDeleteView, StartTaskView, ResumeTaskView, ExpiredTaskView, TaskLogListAPIView
-
-
+from . views import UserRegistrationView, UserLoginView, UserDetailsListView, UserDetailsView, ChangePasswordView, SendResetPasswordEmailView, ResetPasswordView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns=[
-    path("create_task/",CreateTaskView.as_view(), name = 'create_task'),
-    path("list_task/",ListTaskView.as_view(),name = 'list_task'),
-    path("task_update_delete/<int:id>/",TaskUpdateDeleteView.as_view(),name = 'update_delete'),
-    path("start_task/",StartTaskView.as_view(),name ='start_task'),
-    path("resume_task/<int:id>/",ResumeTaskView.as_view(),name = 'resume_task'),
-    path("expired_task/",ExpiredTaskView.as_view(),name = 'expired_task'),
-    path("task_log_list/<int:id>/",TaskLogListAPIView.as_view(),name = 'task_log')
+    path('refresh/', TokenRefreshView.as_view(), name ='token_refresh'),
+    path('user_registration/', UserRegistrationView.as_view(), name = 'registration'),
+    path('user_login/', UserLoginView.as_view(), name = 'login'),
+    path('user_details_list/',UserDetailsListView.as_view(),name = 'detail_list'),
+    path('user_details/<int:id>/',UserDetailsView.as_view(),name = 'details'),
+    path('change_password/',ChangePasswordView.as_view(), name = 'change_password'),
+    path('send_reset_password_email/',SendResetPasswordEmailView.as_view(),name = 'send_email'),
+    path('reset_password/<uid>/<token>',ResetPasswordView.as_view(),name = 'reset_password'),
 ]

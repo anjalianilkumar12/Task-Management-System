@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import Task, TaskLog, Project,Team
+from .models import User
 # Register your models here.
 
-admin.site.register(Task)
-admin.site.register(TaskLog)
-admin.site.register(Project)
-admin.site.register(Team)
+admin.site.register(User)
